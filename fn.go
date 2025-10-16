@@ -3,9 +3,8 @@ package externalsort
 
 import (
 	"bytes"
+	"fmt"
 	"io"
-
-	"github.com/pkg/errors"
 )
 
 func ReadLine(reader io.ReadSeeker) ([]byte, error) {
@@ -44,7 +43,7 @@ func ReadLine(reader io.ReadSeeker) ([]byte, error) {
 	}
 
 	if _, err = reader.Seek(startPos+readOffset, io.SeekStart); err != nil {
-		return nil, errors.WithMessage(err, "on Seek")
+		return nil, fmt.Errorf("on Seek: %w", err)
 	}
 
 	return readBuffer.Bytes(), nil
