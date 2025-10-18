@@ -22,13 +22,10 @@ import (
 // SortedWriter is an io.WriteCloser that sorts its output on writing. Each
 // []byte passed to the Write method is treated as a single item to sort. Since
 // these []byte are kept in memory, they must not be pooled/shared!
-type SortedWriter interface {
-	Write(b []byte) (int, error)
-
-	// Close implements the method from io.Closer. It's important to call this
-	// because this is where the final sorting happens.
-	Close() error
-}
+//
+// Close implements the method from io.Closer. It's important to call this
+// because this is where the final sorting happens.
+type SortedWriter io.WriteCloser
 
 // Less is a function that compares two byte arrays and determines whether a is
 // less than b.
